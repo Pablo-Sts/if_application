@@ -1,7 +1,8 @@
+import { PoolClient, QueryResult } from "pg";
+import connect from "../db";
+
 export default class titleModel {
-<<<<<<< Updated upstream
-    
-=======
+
     private client: Promise<PoolClient>;
 
     constructor() {
@@ -21,5 +22,4 @@ export default class titleModel {
         }
         
     }
->>>>>>> Stashed changes
 }
