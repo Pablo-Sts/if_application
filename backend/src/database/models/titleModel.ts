@@ -8,6 +8,19 @@ export default class titleModel {
     constructor() {
         this.client = connect();
     }
+
+    async getAllTitles() {
+        try {
+            const query: string = "SELECT * FROM title";
+            const result: QueryResult<any> = await (await this.client).query(query);
+            return result.rows[0];
+        }catch(error) {
+            console.log(error);
+            throw error;
+        } finally {
+            (await this.client).release();
+        }
+    }
     
     async addTitle(description: string) {
         try {
