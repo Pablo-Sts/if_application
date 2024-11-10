@@ -2,6 +2,7 @@ import { PoolClient, QueryResult } from "pg";
 import connect from "../db";
 
 export default class titleModel {
+
     private client: Promise<PoolClient>;
 
     constructor() {
@@ -20,7 +21,7 @@ export default class titleModel {
             (await this.client).release();
         }
     }
-
+    
     async addTitle(description: string) {
         try {
             const query: string = "INSERT INTO title (tx_description) VALUES ($1) RETURNING *";
