@@ -8,6 +8,19 @@ export default class titleModel {
         this.client = connect();
     }
 
+    async getAllTitles() {
+        try {
+            const query: string = "SELECT * FROM title";
+            const result: QueryResult<any> = await (await this.client).query(query);
+            return result.rows[0];
+        }catch(error) {
+            console.log(error);
+            throw error;
+        } finally {
+            (await this.client).release();
+        }
+    }
+
     async addTitle(description: string) {
         try {
             const query: string = "INSERT INTO title (tx_description) VALUES ($1) RETURNING *";
