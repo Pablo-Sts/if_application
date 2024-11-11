@@ -48,4 +48,17 @@ export default class titleModel {
         }
         
     }
+
+    async deleteTitle(id: number) {
+        try {
+            const query: string = "DELETE FROM title WHERE id_title = $1";
+            const result: QueryResult<any> = await (await this.client).query(query, [id]);
+            return result.rows[0];
+        } catch (error) {
+            console.log(error);
+            throw error;
+        } finally {
+            (await this.client).release();
+        }
+    }
 }
