@@ -9,6 +9,19 @@ export default class titleModel {
         this.client = connect();
     }
 
+    async getTitle(id: number) {
+        try {
+            const query: string = "SELECT * FROM title WHERE id_title = $1";
+            const result: QueryResult<any> = await (await this.client).query(query, [id]);
+            return result.rows[0];
+        } catch (error) {
+            console.log(error);
+            throw error;
+        } finally {
+            (await this.client).release();
+        }
+    }
+
     async getAllTitles() {
         try {
             const query: string = "SELECT * FROM title";
